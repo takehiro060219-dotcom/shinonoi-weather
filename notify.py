@@ -14,6 +14,14 @@ def is_daytime(time_str):
     return DAYTIME_START_HOUR <= hour <= DAYTIME_END_HOUR
 
 
+def build_hourly_report(hourly):
+    lines = ["【篠ノ井 本日の気象情報】"]
+    for h in hourly:
+        hour = h["time"].split("T")[1][:5]
+        lines.append(f"{hour} {h['temp']}℃ 降水{h['rain_prob']}%")
+    return "\n".join(lines)
+
+
 def build_messages(hourly):
     daytime = [h for h in hourly if is_daytime(h["time"])]
 
@@ -37,10 +45,10 @@ def build_messages(hourly):
 
 def main():
     hourly = fetch_hourly()
-    messages = build_messages(hourly)
-    for msg in messages:
+    all_messages = build_messages(hourly) + [build_hourly_report(hourly)]
+    for msg in all_messages:
         print(msg)
-    send_line_broadcast(messages)
+    send_line_broadcast(all_messages)
 
 
 if __name__ == "__main__":
