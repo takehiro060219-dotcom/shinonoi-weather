@@ -45,7 +45,7 @@ def build_messages(hourly):
 
 def main():
     hourly = fetch_hourly()
-    all_messages = build_messages(hourly) + [build_hourly_report(hourly)]
+    all_messages = [build_hourly_report(hourly)] + build_messages(hourly)
     for msg in all_messages:
         print(msg)
     send_line_broadcast(all_messages)
