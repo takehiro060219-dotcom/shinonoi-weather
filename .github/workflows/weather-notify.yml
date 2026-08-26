@@ -1,0 +1,19 @@
+name: Shinonoi Weather Notify
+
+on:
+  schedule:
+    - cron: "30 21 * * *" # 06:30 JST (UTC+9)
+  workflow_dispatch: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run weather notify
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+        run: python notify.py
