@@ -2,7 +2,7 @@ name: Shinonoi Weather Notify
 
 on:
   schedule:
-    - cron: "0 15 * * *" # 00:00 JST (UTC+9)
+    - cron: "3 15 * * *" # 00:03 JST (UTC+9) — avoid exact-hour congestion
   workflow_dispatch: {}
 
 jobs:
