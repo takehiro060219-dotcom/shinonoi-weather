@@ -3,8 +3,8 @@
 import urllib.request
 import json
 
-LATITUDE = 36.55
-LONGITUDE = 138.14
+LATITUDE = 36.5774
+LONGITUDE = 138.1383
 
 URL = (
     "https://api.open-meteo.com/v1/forecast"
